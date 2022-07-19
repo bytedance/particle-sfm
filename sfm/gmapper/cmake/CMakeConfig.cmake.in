@@ -1,0 +1,110 @@
+# Copyright (c) 2018, ETH Zurich and UNC Chapel Hill.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#
+#     * Neither the name of ETH Zurich and UNC Chapel Hill nor the names of
+#       its contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# Author: Johannes L. Schoenberger (jsch-at-demuc-dot-de)
+
+# Find package module for GCOLMAP library.
+#
+# The following variables are set by this module:
+#
+#   GCOLMAP_FOUND: TRUE if GCOLMAP is found.
+#   GCOLMAP_VERSION: GCOLMAP version.
+#   GCOLMAP_INCLUDE_DIRS: Include directories for GCOLMAP.
+#   GCOLMAP_LINK_DIRS: Link directories for GCOLMAP.
+#   GCOLMAP_LIBRARIES: Libraries required to link GCOLMAP.
+#   GCOLMAP_CUDA_ENABLED: Whether GCOLMAP was compiled with CUDA support.
+#   GCOLMAP_CGAL_ENABLED: Whether GCOLMAP was compiled with CGAL dependencies.
+
+get_filename_component(GCOLMAP_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_FILE} PATH)
+set(GCOLMAP_INSTALL_PREFIX "${GCOLMAP_INSTALL_PREFIX}/../..")
+
+set(GCOLMAP_FOUND FALSE)
+
+# Find dependency packages.
+
+set(TEMP_CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${GCOLMAP_INSTALL_PREFIX}/share/gcolmap/cmake)
+
+if(GCOLMAP_FIND_QUIETLY)
+    find_package(Theia QUIET)
+    find_package(COLMAP QUIET)
+else()
+    find_package(Theia REQUIRED)
+    find_package(COLMAP REQUIRED)
+endif()
+
+# Set the exported variables.
+
+set(GCOLMAP_FOUND TRUE)
+
+set(GCOLMAP_INCLUDE_DIRS
+    ${GCOLMAP_INSTALL_PREFIX}/include/
+    ${GCOLMAP_INSTALL_PREFIX}/include/gcolmap
+    ${COLMAP_INCLUDE_DIRS}
+    ${THEIA_INCLUDE_DIRS}
+)
+
+set(GCOLMAP_LINK_DIRS
+    ${GCOLMAP_INSTALL_PREFIX}/lib/gcolmap
+    ${COLMAP_LINK_DIRS}
+)
+
+set(GCOLMAP_EXTERNAL_LIBRARIES
+    ${CMAKE_DL_LIBS}
+    ${COLMAP_LIBRARIES}
+    ${THEIA_LIBRARIES}
+)
+
+if(UNIX)
+    list(APPEND GCOLMAP_EXTERNAL_LIBRARIES
+        ${Boost_FILESYSTEM_LIBRARY}
+        ${Boost_PROGRAM_OPTIONS_LIBRARY}
+        ${Boost_REGEX_LIBRARY}
+        ${Boost_SYSTEM_LIBRARY}
+        pthread)
+endif()
+
+if(GCOLMAP_OPENMP_ENABLED)
+    find_package(OpenMP QUIET)
+    add_definitions("-DOPENMP_ENABLED")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
+set(GCOLMAP_LIBRARIES
+    gcolmap
+    ${GCOLMAP_EXTERNAL_LIBRARIES}
+)
+
+# Cleanup of configuration variables.
+
+set(CMAKE_MODULE_PATH ${TEMP_CMAKE_MODULE_PATH})
+
+unset(GCOLMAP_INSTALL_PREFIX)
+
