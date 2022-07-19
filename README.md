@@ -146,6 +146,17 @@ python train_seq.py ./configs/your-config-file
 cd ..
 ```
 
+## Citation
+```
+@inproceedings{zhao2022particlesfm,
+      author    = {Zhao, Wang and Liu, Shaohui and Guo, Hengkai and Wang, Wenping and Liu, Yong-Jin},
+      title     = {ParticleSfM: Exploiting Dense Point Trajectories for Localizing Moving Cameras in the Wild},
+      booktitle = {European conference on computer vision (ECCV)},
+      year      = {2022}
+  }
+```
+
+
 ## More related projects
 * [DynaSLAM](https://github.com/BertaBescos/DynaSLAM). Bescos et al. DynaSLAM: Tracking, Mapping and Inpainting in Dynamic Scenes. IROS 2018.
 * [TrianFlow](https://github.com/B1ueber2y/TrianFlow). Zhao et al. Towards Better Generalization: Joint Depth-Pose Learning without PoseNet. CVPR 2020.
