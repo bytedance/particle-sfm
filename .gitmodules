@@ -4,3 +4,11 @@
 [submodule "point_trajectory/optimize/third_party/HighFive"]
 	path = point_trajectory/optimize/third_party/HighFive
 	url = git@github.com:BlueBrain/HighFive.git
+[submodule "third_party/MiDaS"]
+	path = third_party/MiDaS
+	url = https://github.com/B1ueber2y/MiDaS.git
+        branch = particle-sfm
+[submodule "third_party/RAFT"]
+	path = third_party/RAFT
+	url = https://github.com/B1ueber2y/RAFT.git
+        branch = particle-sfm

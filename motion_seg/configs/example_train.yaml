@@ -1,0 +1,23 @@
+cfg_name: "traj_cls_oa_depth_fly"
+
+# dataset
+train_dataset: "flyingthings3d_seq"
+train_root: "/path/to/your/flyingthings3d/data/root/"
+test_dataset: "flyingthings3d_seq"
+test_root: "/path/to/your/flyingthings3d/data/root/"
+num_workers: 16
+
+
+# training
+batch_size: 1
+resolution: [272,480] # 540x960
+max_epochs: 50
+lr: 0.0001
+weight_decay: 0.0001
+print_freq: 200
+log_dir: "./log/traj_cls/"
+
+# model
+model_name: "traj_oa_depth"
+resume_path: ""
+window_size: 10

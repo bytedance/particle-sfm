@@ -1,0 +1,24 @@
+cfg_name: "test_traj_cls_custom"
+
+# dataset
+train_dataset: "custom_seq"
+train_root: "/path/to/your/flyingthings3d/data/root/"
+test_dataset: "custom_seq"
+test_root: "/path/to/your/flyingthings3d/data/root/"
+num_workers: 16
+repeat: 10
+
+# training
+batch_size: 1
+resolution: [240,424] # 540x960
+max_epochs: 50
+lr: 0.0001
+weight_decay: 0.0001
+print_freq: 200
+log_dir: "./log/traj_cls/"
+
+# model
+model_name: "traj_oa_depth"
+resume_path: "./log/pretrain/checkpoint.pth" #/path/to/your/checkpoint/
+window_size: 10
+max_gap: 2

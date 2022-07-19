@@ -8,7 +8,7 @@ PYTHON_EXECUTABLE= # need to be set here
 cd point_trajectory/optimize
 mkdir -p build && cd build
 cmake -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} ..
-make
+make -j
 cd ../../../
 
 # build global mapper

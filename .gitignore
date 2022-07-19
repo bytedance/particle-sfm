@@ -1,0 +1,12 @@
+*.pyc
+*.egg-info
+*.pt
+*.pth
+*.zip
+*.tar.gz
+*.render*
+
+**/build/
+example/
+outputs/
+
