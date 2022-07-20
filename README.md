@@ -1,6 +1,6 @@
 # ParticleSfM
 <p align="center">
-<h3><a href="./">Paper</a> | <a href="https://youtu.be/KfFCdOFE6tA">Video</a> | <a href="http://b1ueber2y.me/projects/ParticleSfM/">Project Page</a></h3>
+<h3><a href="https://arxiv.org/abs/2207.09137">Paper</a> | <a href="https://youtu.be/KfFCdOFE6tA">Video</a> | <a href="http://b1ueber2y.me/projects/ParticleSfM/">Project Page</a></h3>
   <div align="center"></div>
 </p>
 
