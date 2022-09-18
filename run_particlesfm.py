@@ -60,6 +60,8 @@ def motion_segmentation(args, image_dir, output_dir, traj_dir, skip_exists=False
     print("[ParticleSfM] Running point trajectory based motion segmentation........")
     from motion_seg import main_motion_segmentation
     main_motion_segmentation(image_dir, depth_dir, traj_dir, labeled_traj_dir, window_size=args.window_size, traj_max_num=args.traj_max_num, skip_exists=skip_exists)
+    if os.path.isfile(os.path.join(output_dir, "motion_seg.mp4")):
+        os.remove(os.path.join(output_dir, "motion_seg.mp4"))
     shutil.move(os.path.join(labeled_traj_dir, "motion_seg.mp4"), output_dir)
 
     if not keep_intermediate:
