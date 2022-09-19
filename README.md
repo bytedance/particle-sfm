@@ -16,7 +16,7 @@ If you are interested in potential collaboration or internship at ByteDance, ple
 
 ## Installation
 1. Install dependencies:
-* Ceres (installed as a shared library) [[Guide](./misc/doc/ceres.md)]
+* Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
 * COLMAP [[Guide](https://colmap.github.io/install.html)]
 * Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
