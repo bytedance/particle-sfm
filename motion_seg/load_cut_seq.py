@@ -52,7 +52,7 @@ def load_cut_seq(img_dir, depth_dir, traj_dir, window, input_size, traj_max_num)
         output = trajectories.sample_inside_window(np.arange(length).tolist(), max_num_tracks=traj_max_num)
         full_traj = np.concatenate([output["locations"][0][:,:,None], output["locations"][1][:,:,None]], 2)
         nor_traj = resize_point_traj(full_traj, raw_hw, input_size)
-        nor_traj = noramlize_point_traj(nor_traj, input_size)
+        nor_traj = normalize_point_traj(nor_traj, input_size)
         full_mask = (1 - output["masks"]).astype(float)[:,:,None]
         sample_idx = output["traj_ids"]
         return [np.stack(imgs, 0)], [np.stack(depths, 0)], [full_traj], [nor_traj], [full_mask], [np.arange(length)], [sample_idx]
