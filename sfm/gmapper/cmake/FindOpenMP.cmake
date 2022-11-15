@@ -7,6 +7,7 @@ find_path(OpenMP_INCLUDE_DIR
     omp.h
     #HINTS /usr/lib/gcc/x86_64-linux-gnu/4.9/include/
     HINTS /usr/lib/gcc/x86_64-linux-gnu/8/include/
+    HINTS /usr/lib/gcc/x86_64-linux-gnu/9/include/
 )
 
 mark_as_advanced(OpenMP_LIBRARY OpenMP_INCLUDE_DIR)
