@@ -4,6 +4,7 @@
 # PYTHON_EXECUTABLE=/media/shaoliu/anaconda/envs/particlesfm/bin/python
 PYTHON_EXECUTABLE= # need to be set here
 
+
 # build point trajectory optimizer
 cd point_trajectory/optimize
 mkdir -p build && cd build

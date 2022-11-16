@@ -26,7 +26,9 @@ conda env create -f particlesfm_env.yaml
 conda activate particlesfm 
 ```
 
-3. Build our point trajectory optimizer and global structure-from-motion module. **The path to your customized python executable should be set [here](https://github.com/bytedance/particle-sfm/blob/main/scripts/build_all.sh#L5)**.
+3. Build our point trajectory optimizer and global structure-from-motion module. 
+- The path to your customized python executable should be set [here](https://github.com/bytedance/particle-sfm/blob/main/scripts/build_all.sh#L5). 
+- (Optional) Add another gcc search path (e.g. gcc 9) [here](https://github.com/bytedance/particle-sfm/blob/b079361510f5241477d11e11082140b45b5d1c27/sfm/gmapper/cmake/FindOpenMP.cmake#L6) to compile gmapper correctly.
 ```
 git submodule update --init --recursive
 sudo apt-get install libhdf5-dev
