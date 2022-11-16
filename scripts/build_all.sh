@@ -2,7 +2,7 @@
 
 # set your customized python executable
 # PYTHON_EXECUTABLE=/media/shaoliu/anaconda/envs/particlesfm/bin/python
-PYTHON_EXECUTABLE=/home/yzhang/miniconda3/envs/particlesfm/bin/python
+PYTHON_EXECUTABLE= # need to be set here
 
 
 # build point trajectory optimizer
