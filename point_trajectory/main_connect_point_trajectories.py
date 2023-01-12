@@ -24,7 +24,18 @@ from .track import track
 from .track_optimize import track_optimize
 from .optimize.build import particlesfm
 
-def main_connect_point_trajectories(flow_dir, traj_dir, sample_ratio=2, flow_check_thres=1.0, traj_min_len=3, skip_path_consistency=False, skip_exists=False):
+import pdb
+
+
+def main_connect_point_trajectories(
+    flow_dir,
+    traj_dir,
+    sample_ratio=2,
+    flow_check_thres=1.0,
+    traj_min_len=3,
+    skip_path_consistency=False,
+    skip_exists=False,
+):
     # initiate traj_dir
     os.makedirs(traj_dir, exist_ok=True)
     output_npy_fname = os.path.join(traj_dir, "track.npy")
@@ -44,7 +55,9 @@ def main_connect_point_trajectories(flow_dir, traj_dir, sample_ratio=2, flow_che
         flow_f2_dir = os.path.join(flow_dir, "flow_f2")
         flow_b2_dir = os.path.join(flow_dir, "flow_b2")
         flows_f2, flows_b2 = load_flows(flow_f2_dir), load_flows(flow_b2_dir)
-        error_maps_s2, occ_maps_s2 = flow_check(flows_f2, flows_b2, thres=flow_check_thres)
+        error_maps_s2, occ_maps_s2 = flow_check(
+            flows_f2, flows_b2, thres=flow_check_thres
+        )
 
     # start connecting tracks into point trajectories
     if skip_path_consistency:
@@ -54,24 +67,50 @@ def main_connect_point_trajectories(flow_dir, traj_dir, sample_ratio=2, flow_che
 
     # save the outputs
     dict_trajs = {}
+    print(f"found {len(trajs)} trajs")
     for idx, traj in enumerate(trajs):
+
         if traj.length() < traj_min_len:
             continue
         dict_trajs[idx] = traj
+
     trajectories = particlesfm.TrajectorySet(dict_trajs)
     np.save(output_npy_fname, trajectories)
 
+
 def main(args):
-    main_connect_point_trajectories(args.flow_dir, args.traj_dir, sample_ratio=args.sample_ratio, flow_check_thres=args.flow_check_thres, traj_min_len=args.traj_min_len, skip_path_consistency=args.skip_path_consistency)
+    main_connect_point_trajectories(
+        args.flow_dir,
+        args.traj_dir,
+        sample_ratio=args.sample_ratio,
+        flow_check_thres=args.flow_check_thres,
+        traj_min_len=args.traj_min_len,
+        skip_path_consistency=args.skip_path_consistency,
+    )
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("Connecting and optimizing point trajectories from pairwise flows")
+    parser = argparse.ArgumentParser(
+        "Connecting and optimizing point trajectories from pairwise flows"
+    )
     parser.add_argument("--flow_dir", help="path to the folder of optical flows")
     parser.add_argument("--traj_dir", help="trajectory output")
-    parser.add_argument("--sample_ratio", type=int, default=2, help="sample ratio of trajectories")
-    parser.add_argument("--traj_min_len", type=int, default=3, help="minimum length of the trajectories")
-    parser.add_argument("--flow_check_thres", type=float, default=1.0, help="flow consistency check threshold")
-    parser.add_argument("--skip_path_consistency", action='store_true', help='whether to skip the path consistency optimization or not')
+    parser.add_argument(
+        "--sample_ratio", type=int, default=2, help="sample ratio of trajectories"
+    )
+    parser.add_argument(
+        "--traj_min_len", type=int, default=3, help="minimum length of the trajectories"
+    )
+    parser.add_argument(
+        "--flow_check_thres",
+        type=float,
+        default=1.0,
+        help="flow consistency check threshold",
+    )
+    parser.add_argument(
+        "--skip_path_consistency",
+        action="store_true",
+        help="whether to skip the path consistency optimization or not",
+    )
     args = parser.parse_args()
     main(args)
-
