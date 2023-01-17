@@ -147,7 +147,11 @@ def sfm_reconstruction(
 
 
 def particlesfm(
-    args, image_dir, output_dir, skip_exists=False, keep_intermediate=False
+    args,
+    image_dir,
+    output_dir,
+    skip_exists=False,
+    keep_intermediate=False,
 ):
     """
     Inputs:
