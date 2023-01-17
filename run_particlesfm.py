@@ -170,6 +170,7 @@ def particlesfm(
         keep_intermediate=keep_intermediate,
     )
 
+    """
     # motion segmentation
     if not args.assume_static:
         traj_dir = motion_segmentation(
@@ -191,6 +192,7 @@ def particlesfm(
             skip_exists=skip_exists,
             keep_intermediate=keep_intermediate,
         )
+    """
 
 
 def parse_args():
