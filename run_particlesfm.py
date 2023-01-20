@@ -158,10 +158,10 @@ def particlesfm(
     - img_dir: str - The folder containing input images
     - output_dir: str - The workspace directory
     """
-    if not os.path.exists(image_dir):
-        raise ValueError(
-            "Error! The input image directory {0} is not found.".format(image_dir)
-        )
+    # if not os.path.exists(image_dir):
+    #     raise ValueError(
+    #         "Error! The input image directory {0} is not found.".format(image_dir)
+    #     )
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
