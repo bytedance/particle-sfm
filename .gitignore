@@ -10,3 +10,7 @@
 example/
 outputs/
 
+ceres-solver/
+colmap/
+sfm/*
+
