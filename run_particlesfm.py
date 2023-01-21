@@ -158,10 +158,10 @@ def particlesfm(
     - img_dir: str - The folder containing input images
     - output_dir: str - The workspace directory
     """
-    if not os.path.exists(image_dir):
-        raise ValueError(
-            "Error! The input image directory {0} is not found.".format(image_dir)
-        )
+    # if not os.path.exists(image_dir):
+    #     raise ValueError(
+    #         "Error! The input image directory {0} is not found.".format(image_dir)
+    #     )
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -269,6 +269,12 @@ def parse_args():
     # input by sequence directory
     # python run_particlesfm.py --image_dir ${PATH_TO_SEQ_FOLDER} --output_dir ${OUTPUT_WORKSPACE}
     parser.add_argument(
+        "--image_list",
+        nargs="+",
+        default=None,
+        help="path to the sequence folder containing images",
+    )
+    parser.add_argument(
         "-i",
         "--image_dir",
         type=str,
@@ -309,11 +315,12 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     if (
-        args.image_dir != "none" and args.output_dir != "none"
-    ):  # input by sequence directory
+        args.image_dir != "none" or args.image_list != None
+    ) and args.output_dir != "none":  # input by sequence directory
         particlesfm(
             args,
-            args.image_dir,
+            # args.image_dir,
+            args.image_list,
             args.output_dir,
             skip_exists=args.skip_exists,
             keep_intermediate=args.keep_intermediate,
