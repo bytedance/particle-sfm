@@ -10,5 +10,5 @@
         branch = particle-sfm
 [submodule "third_party/RAFT"]
 	path = third_party/RAFT
-	url = https://github.com/B1ueber2y/RAFT.git
+	url = git@github.com:arjunvb/RAFT.git
         branch = particle-sfm
