@@ -32,6 +32,11 @@ endif()
 
 find_package(Theia REQUIRED)
 find_package(COLMAP REQUIRED)
+message(STATUS "Ceres version: ${CERES_VERSION}")
+if(${CERES_VERSION} VERSION_LESS "2.2.0")
+    # ceres 2.2.0 changes the interface of local parameterization
+    add_definitions("-DCERES_PARAMETERIZATION_ENABLED")
+endif()
 
 ################################################################################
 # Compiler specific configuration
