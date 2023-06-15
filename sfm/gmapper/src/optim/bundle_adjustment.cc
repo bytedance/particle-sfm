@@ -417,18 +417,30 @@ void BundleAdjuster::AddImageToProblem(const image_t image_id,
 
     // Set pose parameterization.
     if (!constant_pose) {
+#ifdef CERES_PARAMETERIZATION_ENABLED
       ceres::LocalParameterization* quaternion_parameterization =
           new ceres::QuaternionParameterization;
       problem_->SetParameterization(qvec_data, quaternion_parameterization);
+#else
+      ceres::Manifold* quaternion_manifold = 
+          new ceres::QuaternionManifold;
+      problem_->SetManifold(qvec_data, quaternion_manifold);
+#endif
       if (!options_.refine_rotation) {
         problem_->SetParameterBlockConstant(qvec_data);
       }
       if (config_.HasConstantTvec(image_id)) {
         const std::vector<int>& constant_tvec_idxs =
             config_.ConstantTvec(image_id);
+#ifdef CERES_PARAMETERIZATION_ENABLED
         ceres::SubsetParameterization* tvec_parameterization =
             new ceres::SubsetParameterization(3, constant_tvec_idxs);
         problem_->SetParameterization(tvec_data, tvec_parameterization);
+#else
+        ceres::Manifold* subset_manifold = 
+            new ceres::SubsetManifold(3, constant_tvec_idxs);
+        problem_->SetManifold(tvec_data, subset_manifold);
+#endif
       }
     }
   }
@@ -515,11 +527,17 @@ void BundleAdjuster::ParameterizeCameras(Reconstruction* reconstruction) {
       }
 
       if (const_camera_params.size() > 0) {
+#ifdef CERES_PARAMETERIZATION_ENABLED
         ceres::SubsetParameterization* camera_params_parameterization =
             new ceres::SubsetParameterization(
                 static_cast<int>(camera.NumParams()), const_camera_params);
         problem_->SetParameterization(camera.ParamsData(),
                                       camera_params_parameterization);
+#else
+        ceres::Manifold* subset_manifold = 
+            new ceres::SubsetManifold(static_cast<int>(camera.NumParams()), const_camera_params);
+        problem_->SetManifold(camera.ParamsData(), subset_manifold);
+#endif
       }
     }
   }
