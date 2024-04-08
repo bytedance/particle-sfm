@@ -23,6 +23,7 @@ sudo apt-get install \
     libqt5opengl5-dev \
     libcgal-dev \
     libceres-dev
+```
 
 Clone colmap, checkout the version which works with this repo, compile and install:
 ```
