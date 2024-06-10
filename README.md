@@ -134,7 +134,7 @@ This will output a txt file with detailed error metrics. Also, the camera trajec
 ## Training
 1. Download the Flyingthings3D dataset from the [official website](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html). We need the RGB images (finalpass) and optical flow data.
 
-2. Download the generated binary motion labels from [here](http://thoth.inrialpes.fr/research/mpnet/labels.tar.gz), and unpack this archive into the root directory of the FlyingThings3D dataset. We thank the authors of [MPNet](http://thoth.inrialpes.fr/research/mpnet/) for kindly sharing it.
+2. Download the generated binary motion labels from [here](http://thoth.inrialpes.fr/research/mpnet/labels.tar.gz) or [GoogleDrive](https://drive.google.com/file/d/1Bgg7mM6kMtXdIZt11Q-ZF9NWBu4L7qnW/view?usp=sharing), and unpack this archive into the root directory of the FlyingThings3D dataset. We thank the authors of [MPNet](http://thoth.inrialpes.fr/research/mpnet/) for kindly sharing it.
 
 3. Prepare the training data:
 ```
