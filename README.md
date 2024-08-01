@@ -17,7 +17,7 @@ If you are interested in potential collaboration or internship at ByteDance, ple
 ## Installation
 1. Install dependencies:
 * Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
-* COLMAP [[Guide](./misc/doc/colmap.md)]
+* COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
 * Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
 2. Set up Python environment with Conda:
