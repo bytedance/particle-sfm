@@ -7,7 +7,7 @@ Clone the customized repo, compile and install:
 ```
 git clone https://github.com/B1ueber2y/TheiaSfM
 cd TheiaSfM
-git checkout particle-sfm
+git checkout upstream/particle-sfm
 mkdir build && cd build
 cmake ..
 make -j
