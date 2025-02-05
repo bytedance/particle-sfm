@@ -4,7 +4,7 @@
   <div align="center"></div>
 </p>
 
-Code release for our ECCV 2022 paper "ParticleSfM: Exploiting Dense Point Trajectories for Localizing Moving Cameras in the Wild." by [Wang Zhao](https://github.com/thuzhaowang), [Shaohui Liu](http://www.b1ueber2y.me/), [Hengkai Guo](https://github.com/guohengkai), [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html) and [Yong-Jin Liu](https://cg.cs.tsinghua.edu.cn/people/~Yongjin/Yongjin.htm).
+Code release for our ECCV 2022 paper "ParticleSfM: Exploiting Dense Point Trajectories for Localizing Moving Cameras in the Wild." by [Wang Zhao](https://thuzhaowang.github.io/), [Shaohui Liu](http://www.b1ueber2y.me/), [Hengkai Guo](https://guohengkai.github.io/), [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html) and [Yong-Jin Liu](https://cg.cs.tsinghua.edu.cn/people/~Yongjin/Yongjin.htm).
 
 **[Introduction]** ParticleSfM is an offline structure-from-motion system for videos (image sequences). Inspired by [Particle video](http://rvsn.csail.mit.edu/pv/), our method connects pairwise optical flows and optimizes dense point trajectories as long-range video correpondences, which are used in a customized global structure-from-motion framework with similarity averaging and global bundle adjustment. In particular, for dynamic scenes, the acquired dense point trajectories can be fed into a specially designed trajectory-based motion segmentation module to select static point tracks, enabling the system to produce reliable camera trajectories on in-the-wild sequences with complex foreground motion. 
 
@@ -19,8 +19,8 @@ We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which ach
 
 | Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) | Frame Number |
 |:-:|:-:|:-:|:-:|:-:|:-:|
-| Global SfM (Ours w/ Theia) | 0.104 | 0.054 | 0.414 | **3.35** | 45.6 | 
-| Global SfM (Ours w/ GLOMAP) | **0.057** | **0.031** | **0.201** | 6.97 | 45.6 | 
+| Global SfM - Ours w/ gcolmap(Theia) | 0.104 | 0.054 | 0.414 | **3.35** | 45.6 | 
+| Global SfM - Ours w/ GLOMAP | **0.057** | **0.031** | **0.201** | 6.97 | 45.6 | 
 
 Test it by simply changing the `sfm_type` to `global_glomap`:
 ```
@@ -162,6 +162,11 @@ cd ./motion_seg/
 python train_seq.py ./configs/your-config-file
 cd ..
 ```
+
+## Applications
+* Motion Control for Video Generation: [MotionCtrl](https://wzhouxiff.github.io/projects/MotionCtrl/), [CamCo](https://ir1d.github.io/CamCo/)
+* Motion Evaluation for Video Generation: [AnimateAnything](https://yu-shaonian.github.io/Animate_Anything/), [AC3D](https://snap-research.github.io/ac3d/)
+* Kinematic Control Annotation: [EgoVid-5M](https://egovid.github.io/)
 
 ## Citation
 ```
