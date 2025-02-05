@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 project(traj_ceres)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(Ceres REQUIRED)
 include_directories(${CERES_INCLUDE_DIRS})

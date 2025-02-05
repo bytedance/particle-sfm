@@ -75,13 +75,19 @@ def sfm_reconstruction(args, image_dir, output_dir, traj_dir, skip_exists=False,
     sfm_dir = os.path.join(output_dir, "sfm")
 
     # sfm reconstruction
-    from sfm import main_global_sfm, main_incremental_sfm, write_depth_pose_from_colmap_format
-    if not args.incremental_sfm:
-        print("[ParticleSfM] Running global structure-from-motion........")
+    from sfm import main_global_sfm, main_incremental_sfm, main_global_sfm_glomap, write_depth_pose_from_colmap_format
+    if args.sfm_type == 'global_theia':
+        print("[ParticleSfM] Running global structure-from-motion with Theia........")
         main_global_sfm(sfm_dir, image_dir, traj_dir, remove_dynamic=(not args.assume_static), skip_exists=skip_exists)
-    else:
+    elif args.sfm_type == 'incremental_colmap':
         print("[ParticleSfM] Running incremental structure-from-motion with COLMAP........")
         main_incremental_sfm(sfm_dir, image_dir, traj_dir, remove_dynamic=(not args.assume_static), skip_exists=skip_exists)
+    elif args.sfm_type == 'global_glomap':
+        print("[ParticleSfM] Running global structure-from-motion with GLOMAP........")
+        main_global_sfm_glomap(sfm_dir, image_dir, traj_dir, remove_dynamic=(not args.assume_static), skip_exists=skip_exists)
+    else:
+        print('error sfm type: ', args.sfm_type)
+        assert False
 
     # # write depth and pose files from COLMAP format
     write_depth_pose_from_colmap_format(sfm_dir, os.path.join(output_dir, "colmap_outputs_converted"))
@@ -122,7 +128,7 @@ def parse_args():
     parser.add_argument("--window_size", type=int, default=10, help='the window size for trajectory motion segmentation')
     parser.add_argument("--traj_max_num", type=int, default=100000, help='the maximum number of trajs inside a window')
     # sfm
-    parser.add_argument("--incremental_sfm", action='store_true', help='whether to use incremental sfm or not')
+    parser.add_argument("--sfm_type", default='global_theia', choices=['incremental_colmap', 'global_theia', 'global_glomap'], help='sfm type')
     # pipeline control
     parser.add_argument("--skip_path_consistency", action='store_true', help='whether to skip the path consistency optimization or not')
     parser.add_argument("--assume_static", action='store_true', help='whether to skip the motion segmentation or not')

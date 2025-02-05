@@ -21,6 +21,7 @@ import logging
 from pathlib import Path
 import shutil
 import pprint
+import time
 
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -113,7 +114,10 @@ def main_incremental_sfm(sfm_dir, image_dir, traj_dir, colmap_path="colmap", sin
         '--Mapper.ba_refine_principal_point', str(0),
         '--Mapper.ba_refine_extra_params', str(0)]
     print(' '.join(cmd))
+    start = time.time()
     subprocess.run(cmd, check=True)
+    end = time.time()
+    print('incremental sfm: {}s'.format(end - start))
 
     # analyze model
     stats = compute_model_stats(model_path)
@@ -144,7 +148,35 @@ def main_global_sfm(sfm_dir, image_dir, traj_dir, gcolmap_path=None, colmap_path
     cmd += ['--GlobalMapper.ba_refine_principal_point', str(0),
         '--GlobalMapper.ba_refine_extra_params', str(0)]
     print(' '.join(cmd))
+    start = time.time()
     subprocess.run(cmd, check=True)
+    end = time.time()
+    print('global sfm: {}s'.format(end - start))
+
+    # analyze model
+    stats = compute_model_stats(model_path)
+    if stats is not None:
+        print(stats)
+
+def main_global_sfm_glomap(sfm_dir, image_dir, traj_dir, gcolmap_path=None, glomap_path="glomap", colmap_path="colmap", single_camera=True, remove_dynamic=True, skip_geometric_verification=False, min_num_matches=None, skip_exists=False):
+    """
+    Global structure-from-motion for videos using GLOMAP
+    """
+    database_path, pair_txt_path = build_database(sfm_dir, image_dir, traj_dir, colmap_path=colmap_path, single_camera=single_camera, remove_dynamic=remove_dynamic, skip_geometric_verification=skip_geometric_verification, skip_exists=skip_exists)
+    model_path = Path(sfm_dir) / 'model'
+    model_path.mkdir(exist_ok=True, parents=True)
+
+    # run global structure-from-motion
+    cmd = [
+        str(glomap_path), 'mapper',
+        '--database_path', str(database_path),
+        '--image_path', str(image_dir),
+        '--output_path', str(model_path)]
+    print(' '.join(cmd))
+    start = time.time()
+    subprocess.run(cmd, check=True)
+    end = time.time()
+    print('global sfm with GLOMAP: {}s'.format(end - start))
 
     # analyze model
     stats = compute_model_stats(model_path)

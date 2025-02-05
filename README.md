@@ -4,7 +4,7 @@
   <div align="center"></div>
 </p>
 
-Code release for our ECCV 2022 paper "ParticleSfM: Exploiting Dense Point Trajectories for Localizing Moving Cameras in the Wild." by [Wang Zhao](https://github.com/thuzhaowang), [Shaohui Liu](http://www.b1ueber2y.me/), [Hengkai Guo](https://github.com/guohengkai), [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html) and [Yong-Jin Liu](https://cg.cs.tsinghua.edu.cn/people/~Yongjin/Yongjin.htm).
+Code release for our ECCV 2022 paper "ParticleSfM: Exploiting Dense Point Trajectories for Localizing Moving Cameras in the Wild." by [Wang Zhao](https://thuzhaowang.github.io/), [Shaohui Liu](http://www.b1ueber2y.me/), [Hengkai Guo](https://guohengkai.github.io/), [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html) and [Yong-Jin Liu](https://cg.cs.tsinghua.edu.cn/people/~Yongjin/Yongjin.htm).
 
 **[Introduction]** ParticleSfM is an offline structure-from-motion system for videos (image sequences). Inspired by [Particle video](http://rvsn.csail.mit.edu/pv/), our method connects pairwise optical flows and optimizes dense point trajectories as long-range video correpondences, which are used in a customized global structure-from-motion framework with similarity averaging and global bundle adjustment. In particular, for dynamic scenes, the acquired dense point trajectories can be fed into a specially designed trajectory-based motion segmentation module to select static point tracks, enabling the system to produce reliable camera trajectories on in-the-wild sequences with complex foreground motion. 
 
@@ -14,11 +14,32 @@ Contact Wang Zhao (thuzhaowang@163.com), Shaohui Liu (b1ueber2y@gmail.com) and H
 
 If you are interested in potential collaboration or internship at ByteDance, please feel free to contact Hengkai Guo (guohengkai@bytedance.com).
 
+## Update by 2025.02.05
+We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results on 13 sequences of the [Sintel dataset](http://sintel.is.tue.mpg.de/):
+
+| Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM runtime (min) | #Frames |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| Global SfM - Ours w/ gcolmap(Theia) | 0.104 | 0.054 | 0.414 | **3.35** | 45.6 | 
+| Global SfM - Ours w/ GLOMAP | **0.057** | **0.031** | **0.201** | 6.97 | 45.6 | 
+
+Test it by simply changing the `sfm_type` to `global_glomap`:
+```
+python run_particlesfm.py --image_dir /path/to/the/image/folder/ \
+                          --output_dir /path/to/output/workspace/ \
+                          --sfm_type global_glomap  # "global_theia" for the paper version
+```
+
 ## Installation
 1. Install dependencies:
+
+For using gcolmap (Theia) as in the original ParticleSfM paper:
 * Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
 * COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
 * Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
+
+Alternatively, if you want to use our latest [GLOMAP](https://github.com/colmap/glomap) support:
+* Ceres with lastest version
+* GLOMAP
 
 2. Set up Python environment with Conda:
 ```
@@ -147,6 +168,11 @@ cd ./motion_seg/
 python train_seq.py ./configs/your-config-file
 cd ..
 ```
+
+## Applications
+* Motion Control for Video Generation: [MotionCtrl](https://wzhouxiff.github.io/projects/MotionCtrl/), [CamCo](https://ir1d.github.io/CamCo/)
+* Motion Evaluation for Video Generation: [AnimateAnything](https://yu-shaonian.github.io/Animate_Anything/), [AC3D](https://snap-research.github.io/ac3d/)
+* Kinematic Control Annotation: [EgoVid-5M](https://egovid.github.io/)
 
 ## Citation
 ```
