@@ -32,13 +32,12 @@ python run_particlesfm.py --image_dir /path/to/the/image/folder/ \
 ## Installation
 1. Install dependencies:
 
+* Ceres >= 2.0.0
 For using gcolmap (Theia) as in the original ParticleSfM paper:
-* Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
 * COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
 * Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
 Alternatively, if you want to use our latest [GLOMAP](https://github.com/colmap/glomap) support:
-* Ceres with lastest version
 * GLOMAP
 
 2. Set up Python environment with Conda:
