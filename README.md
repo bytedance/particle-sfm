@@ -17,7 +17,7 @@ If you are interested in potential collaboration or internship at ByteDance, ple
 ## Update by 2025.02.05
 We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results on 13 sequences of the [Sintel dataset](http://sintel.is.tue.mpg.de/):
 
-| Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) | Frame Number |
+| Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM runtime (min) | #Frames |
 |:-:|:-:|:-:|:-:|:-:|:-:|
 | Global SfM - Ours w/ gcolmap(Theia) | 0.104 | 0.054 | 0.414 | **3.35** | 45.6 | 
 | Global SfM - Ours w/ GLOMAP | **0.057** | **0.031** | **0.201** | 6.97 | 45.6 | 
@@ -31,7 +31,7 @@ python run_particlesfm.py --image_dir /path/to/the/image/folder/ \
 
 ## Installation
 1. Install dependencies:
-* Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
+* Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)] (With GLOMAP we should be able to use the newest ceres version. Ceres 2.0.0 is only required when gcolmap is used)
 * (Skip it if you use [GLOMAP](https://github.com/colmap/glomap)) COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
 * (Skip it if you use [GLOMAP](https://github.com/colmap/glomap)) Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
