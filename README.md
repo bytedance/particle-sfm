@@ -15,9 +15,10 @@ Contact Wang Zhao (thuzhaowang@163.com), Shaohui Liu (b1ueber2y@gmail.com) and H
 If you are interested in potential collaboration or internship at ByteDance, please feel free to contact Hengkai Guo (guohengkai@bytedance.com).
 
 ## Update by 2025.02.05
-We support [[GLOMAP]](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results:
+We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results:
 
 | Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) |
+|:-:|:-:|:-:|:-:|:-:|
 | Global(Theia) | 0.104 | 0.054 | 0.414 | 3.35 |
 | Global(GLOMAP) | 0.057 | 0.031 | 0.201 | 6.97 |
 
@@ -32,7 +33,7 @@ Test it by:
 1. Install dependencies:
 * Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
 * COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
-* (Skip it if you use [[GLOMAP]](https://github.com/colmap/glomap)) Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
+* (Skip it if you use [GLOMAP](https://github.com/colmap/glomap)) Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
 2. Set up Python environment with Conda:
 ```
