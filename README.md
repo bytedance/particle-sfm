@@ -15,18 +15,18 @@ Contact Wang Zhao (thuzhaowang@163.com), Shaohui Liu (b1ueber2y@gmail.com) and H
 If you are interested in potential collaboration or internship at ByteDance, please feel free to contact Hengkai Guo (guohengkai@bytedance.com).
 
 ## Update by 2025.02.05
-We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results on 13 sequences of the Sintel training set:
+We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results on 13 sequences of the [Sintel dataset](http://sintel.is.tue.mpg.de/):
 
-| Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) |
-|:-:|:-:|:-:|:-:|:-:|
-| Global(Theia) | 0.104 | 0.054 | 0.414 | 3.35 |
-| Global(GLOMAP) | 0.057 | 0.031 | 0.201 | 6.97 |
+| Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) | Frame Number |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| Global SfM (Ours w/ Theia) | 0.104 | 0.054 | 0.414 | **3.35** | 45.6 | 
+| Global SfM (Ours w/ GLOMAP) | **0.057** | **0.031** | **0.201** | 6.97 | 45.6 | 
 
-Test it by:
+Test it by simply changing the `sfm_type` to `global_glomap`:
 ```
-    python run_particlesfm.py --image_dir /path/to/the/image/folder/ \
-                              --output_dir /path/to/output/workspace/ \
-                              --sfm_type global_glomap  # "global_theia" for the paper version
+python run_particlesfm.py --image_dir /path/to/the/image/folder/ \
+                          --output_dir /path/to/output/workspace/ \
+                          --sfm_type global_glomap  # "global_theia" for the paper version
 ```
 
 ## Installation
