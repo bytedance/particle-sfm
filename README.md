@@ -15,7 +15,7 @@ Contact Wang Zhao (thuzhaowang@163.com), Shaohui Liu (b1ueber2y@gmail.com) and H
 If you are interested in potential collaboration or internship at ByteDance, please feel free to contact Hengkai Guo (guohengkai@bytedance.com).
 
 ## Update by 2025.02.05
-We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results:
+We support [GLOMAP](https://github.com/colmap/glomap) in our pipeline, which achieves more accurate results on 13 sequences of the Sintel training set:
 
 | Method | ATE (m) | RPE trans (m) | RPE rot (deg) | SfM Time (min) |
 |:-:|:-:|:-:|:-:|:-:|
@@ -32,7 +32,7 @@ Test it by:
 ## Installation
 1. Install dependencies:
 * Ceres 2.0.0 [[Guide](./misc/doc/ceres.md)]
-* COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
+* (Skip it if you use [GLOMAP](https://github.com/colmap/glomap)) COLMAP <= 3.8 [[Guide](./misc/doc/colmap.md)]
 * (Skip it if you use [GLOMAP](https://github.com/colmap/glomap)) Theia SfM (customized version) [[Guide](./misc/doc/theia.md)]
 
 2. Set up Python environment with Conda:
