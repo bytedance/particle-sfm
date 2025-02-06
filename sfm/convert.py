@@ -79,15 +79,17 @@ def save_depth_pose(output_dir, cameras, images, points3D):
             points_3d.append((points3D[idx].xyz))
             valid_xys.append(xys[i])
 
-        points_3d = np.transpose(np.array(points_3d))
-        # project onto image
-        cam_points = np.matmul(R, points_3d) + t
-        project_depth = np.transpose(np.matmul(K, cam_points))[:,-1]
-        xy_int = np.round(np.array(valid_xys)).astype(np.int32)
-        xy_int[:,0] = np.clip(xy_int[:,0], 0, w-1)
-        xy_int[:,1] = np.clip(xy_int[:,1], 0, h-1)
         depth = np.zeros(shape=(h,w))
-        depth[xy_int[:,1], xy_int[:,0]] = project_depth
+        if points_3d:
+            points_3d = np.transpose(np.array(points_3d))
+            # project onto image
+            cam_points = np.matmul(R, points_3d) + t
+            project_depth = np.transpose(np.matmul(K, cam_points))[:,-1]
+            xy_int = np.round(np.array(valid_xys)).astype(np.int32)
+            xy_int[:,0] = np.clip(xy_int[:,0], 0, w-1)
+            xy_int[:,1] = np.clip(xy_int[:,1], 0, h-1)
+            depth[xy_int[:,1], xy_int[:,0]] = project_depth
+
         # save depth and pose
         np.save(os.path.join(depth_dir, os.path.splitext(image_name)[0]+'.npy'), depth)
         plt.imsave(os.path.join(depth_dir, os.path.splitext(image_name)[0]+'.png'), normalize_depth_for_display(depth, cmap='binary'))
